@@ -24,12 +24,12 @@ aggregation — runs **server-side**. The frontend is presentation only.
 
 ## Prerequisites
 
-| Requirement | Version |
-|---|---|
-| Python | 3.10 or later |
-| pip | bundled with Python |
-| Node.js | 18 or later |
-| npm | bundled with Node.js |
+| Requirement | Version              |
+| ----------- | -------------------- |
+| Python      | 3.10 or later        |
+| pip         | bundled with Python  |
+| Node.js     | 18 or later          |
+| npm         | bundled with Node.js |
 
 Verify before running:
 
@@ -46,7 +46,6 @@ npm --version
 ```bash
 # 1. Clone the repo
 git clone https://github.com/shivmehra/subscription-tracker.git
-cd subscription-tracker
 
 # 2. Launch (installs deps automatically on first run)
 python start.py
@@ -131,13 +130,13 @@ after every mutation so computed fields never drift from the backend.
 
 ## REST API
 
-| Method | Path | Purpose |
-|---|---|---|
-| `POST`   | `/api/subscriptions` | Create; cost normalized server-side |
-| `GET`    | `/api/subscriptions` | All subs + computed `days_until_renewal`, `is_urgent` |
-| `GET`    | `/api/metrics` | `total_monthly_burn` + `urgent_count` (active only) |
-| `PATCH`  | `/api/subscriptions/{id}/toggle` | Flip active/paused (never deletes) |
-| `DELETE` | `/api/subscriptions/{id}` | Hard delete |
+| Method   | Path                             | Purpose                                               |
+| -------- | -------------------------------- | ----------------------------------------------------- |
+| `POST`   | `/api/subscriptions`             | Create; cost normalized server-side                   |
+| `GET`    | `/api/subscriptions`             | All subs + computed `days_until_renewal`, `is_urgent` |
+| `GET`    | `/api/metrics`                   | `total_monthly_burn` + `urgent_count` (active only)   |
+| `PATCH`  | `/api/subscriptions/{id}/toggle` | Flip active/paused (never deletes)                    |
+| `DELETE` | `/api/subscriptions/{id}`        | Hard delete                                           |
 
 Interactive docs: **http://localhost:8000/docs**
 
@@ -150,6 +149,7 @@ Interactive docs: **http://localhost:8000/docs**
 - The Vite dev server proxies `/api` requests to the backend — no CORS
   configuration needed in the browser.
 - To run the servers manually (two separate terminals):
+
   ```bash
   # Terminal 1
   cd backend && python -m uvicorn main:app --reload
