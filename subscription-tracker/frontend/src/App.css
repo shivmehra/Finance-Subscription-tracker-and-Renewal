@@ -1,0 +1,475 @@
+/* ============================================================
+   Design tokens
+   A GitHub-dark developer aesthetic applied to a finance tool.
+   Amber is the brand accent; red is reserved strictly for urgency.
+   ============================================================ */
+:root {
+  --ground: #0d1117;
+  --surface: #161b22;
+  --surface-2: #1c2330;
+  --border: #272e3a;
+  --border-strong: #3a4658;
+
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-faint: #6e7681;
+
+  --amber: #f5a623;
+  --amber-soft: rgba(245, 166, 35, 0.12);
+  --amber-border: rgba(245, 166, 35, 0.4);
+
+  --red: #f85149;
+  --red-soft: rgba(248, 81, 73, 0.12);
+  --red-border: rgba(248, 81, 73, 0.4);
+
+  --green: #3fb950;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --mono: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace, Menlo,
+    Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.app__header {
+  margin-bottom: 32px;
+}
+
+.app__title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app__mark {
+  color: var(--amber);
+  font-size: 24px;
+}
+
+.app__tagline {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.banner {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.banner--error {
+  background: var(--red-soft);
+  border: 1px solid var(--red-border);
+  color: #ffb3ae;
+}
+
+/* ============================================================
+   Metrics cards
+   ============================================================ */
+.metrics-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card--primary {
+  border-color: var(--amber-border);
+  background: linear-gradient(180deg, var(--amber-soft), var(--surface) 60%);
+}
+
+.card--alert {
+  border-color: var(--red-border);
+  background: linear-gradient(180deg, var(--red-soft), var(--surface) 60%);
+}
+
+.card__label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.card__value {
+  font-family: var(--mono);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.card--primary .card__value {
+  color: var(--amber);
+}
+
+.card--alert .card__value {
+  color: var(--red);
+}
+
+.card__sub {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   Entry form
+   ============================================================ */
+.entry-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 36px;
+}
+
+.entry-form__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.field input,
+.field select {
+  background: var(--ground);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-soft);
+}
+
+/* Make the native date-picker indicator visible on dark backgrounds. */
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
+
+.field__currency {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field__currency-symbol {
+  position: absolute;
+  left: 12px;
+  color: var(--text-faint);
+  font-family: var(--mono);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.field__currency input {
+  padding-left: 26px;
+  font-family: var(--mono);
+}
+
+.entry-form__error {
+  color: var(--red);
+  font-size: 13px;
+  margin: 0 0 16px;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #1a1206;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Subscription table
+   ============================================================ */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.sub-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.sub-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-faint);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.sub-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.sub-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sub-table tbody tr {
+  transition: background 0.12s;
+}
+
+.sub-table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.cell-name {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.num {
+  font-family: var(--mono);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sub-table th:nth-child(2),
+.sub-table th:nth-child(4),
+.sub-table th:nth-child(5) {
+  text-align: right;
+}
+
+.renews-urgent {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+/* Amber caution badge for items renewing within 7 days. */
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.badge--soon {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+
+/* Paused rows are greyed but never removed — the savings simulation. */
+.row-paused {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.row-paused:hover {
+  background: transparent;
+}
+
+.empty-state {
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ============================================================
+   Toggle switch (active / paused)
+   ============================================================ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.toggle__track {
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  position: relative;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+
+.toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.18s;
+}
+
+.toggle--on .toggle__track {
+  background: var(--green);
+}
+
+.toggle--on .toggle__thumb {
+  transform: translateX(16px);
+}
+
+.toggle__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 48px;
+  text-align: left;
+}
+
+.toggle--on .toggle__label {
+  color: var(--green);
+}
+
+/* ============================================================
+   Delete button
+   ============================================================ */
+.btn-delete {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-faint);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  transition: all 0.15s;
+}
+
+.btn-delete:hover {
+  color: var(--red);
+  border-color: var(--red-border);
+  background: var(--red-soft);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .metrics-row {
+    grid-template-columns: 1fr;
+  }
+  .entry-form__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .entry-form__grid {
+    grid-template-columns: 1fr;
+  }
+  .app {
+    padding: 32px 16px 64px;
+  }
+}
