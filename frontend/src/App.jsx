@@ -15,6 +15,7 @@ export default function App() {
     urgent_count: 0,
   });
   const [loadError, setLoadError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
     try {
@@ -29,6 +30,8 @@ export default function App() {
       setLoadError(
         "Could not reach the server. Is the backend running on port 8000?"
       );
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -86,6 +89,7 @@ export default function App() {
           subscriptions={subscriptions}
           onToggle={handleToggle}
           onDelete={handleDelete}
+          loading={loading}
         />
       </section>
     </div>

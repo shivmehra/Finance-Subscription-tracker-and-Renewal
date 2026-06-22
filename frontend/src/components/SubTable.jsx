@@ -10,12 +10,17 @@ function formatCurrency(value) {
 }
 
 function renewalText(days) {
+  if (days < 0) return "Overdue";
   if (days === 0) return "Today";
   if (days === 1) return "1 day";
   return `${days} days`;
 }
 
-export default function SubTable({ subscriptions, onToggle, onDelete }) {
+export default function SubTable({ subscriptions, onToggle, onDelete, loading }) {
+  if (loading) {
+    return <div className="empty-state">Loading subscriptions…</div>;
+  }
+
   if (subscriptions.length === 0) {
     return (
       <div className="empty-state">
@@ -69,7 +74,15 @@ export default function SubTable({ subscriptions, onToggle, onDelete }) {
                 <button
                   type="button"
                   className="btn-delete"
-                  onClick={() => onDelete(sub.id)}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        `Delete "${sub.name}"? This can't be undone.`
+                      )
+                    ) {
+                      onDelete(sub.id);
+                    }
+                  }}
                   aria-label={`Delete ${sub.name}`}
                 >
                   ✕

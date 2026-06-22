@@ -27,6 +27,11 @@ export default function EntryForm({ onAdd }) {
       return;
     }
 
+    if (parseFloat(form.cost) <= 0) {
+      setError("Cost must be greater than zero.");
+      return;
+    }
+
     setSubmitting(true);
     try {
       await onAdd({
